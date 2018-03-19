@@ -80,8 +80,8 @@ class App extends Component {
     
      mc.on("swipedown", ev => this.decrementDimension())
       .on("swipeup", ev => this.incrementDimension())
-      .on("swipeleft", ev => this.decrementDimension())
-      .on("swiperight", ev => this.incrementDimension())
+      .on("swipeleft", ev => this.decrementFolds())
+      .on("swiperight", ev => this.incrementFolds())
       .on("pinchin", ev => { this.incrementDimension()})
       .on("pinchout", ev => { this.decrementDimension()})
   }
