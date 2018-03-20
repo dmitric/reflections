@@ -20,6 +20,8 @@ class App extends Component {
       paper: 0,
       dimension: 4,
       folds: 8,
+      initialRadius: 1.2,
+      radiusScaleFactor: 1,
       spiralDimension: 2,
       borderWidth: 0.008,
     }
@@ -130,11 +132,11 @@ class App extends Component {
   }
 
   incrementFolds () {
-    this.setState({folds: Math.min(40, this.state.folds + 1)})
+    this.setState({folds: Math.min(40, this.state.folds + 2)})
   }
 
   decrementFolds () {
-    this.setState({folds: Math.max(2, this.state.folds - 1)})
+    this.setState({folds: Math.max(2, this.state.folds - 2)})
   }
 
   incrementDimension () {
@@ -259,14 +261,14 @@ class App extends Component {
     const cy = this.state.borderWidth*actualHeight * y + (y-1)*blockWidth + rectWidth/2
 
     const circles = []
-    let radius = 1.2
+    let radius = this.state.initialRadius
 
     for (let i=0; i < this.state.folds; i++){
       circles.push(<circle key={'circle-'+i} cx={cx}
                       cy={cy}
                       r={rectWidth*radius/2} fill={i%2 === 0 ? circleFill: fill} />)
       
-      radius -= 1/this.state.folds
+      radius -= this.state.radiusScaleFactor/this.state.folds
     }
 
     let mainCol = !flip ? fill : circleFill
